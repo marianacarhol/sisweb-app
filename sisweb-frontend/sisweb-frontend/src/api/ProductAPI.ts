@@ -1,6 +1,22 @@
 import api from ".";
 import { Product } from "my-types";
 
+//ADD A PRODUCT
+export const addProduct = async (nombre:string, cantidad:number, productTypeId: number) => {
+    try {
+        const res = await api.post(`/product/`, { nombre, cantidad, productTypeId }, {
+        
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        console.log("Product created successfully:", res.data)
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 //GET ALL PRODUCTS
 export const getAllProducts = async () => {
 try {

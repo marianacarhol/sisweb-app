@@ -44,13 +44,13 @@ __decorate([
 ], Donation.prototype, "producto", void 0);
 __decorate([
     sequelize_typescript_1.CreatedAt,
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.DATEONLY }),
-    __metadata("design:type", String)
+    sequelize_typescript_1.Column,
+    __metadata("design:type", Date)
 ], Donation.prototype, "createdAt", void 0);
 __decorate([
     sequelize_typescript_1.UpdatedAt,
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.DATEONLY }),
-    __metadata("design:type", String)
+    sequelize_typescript_1.Column,
+    __metadata("design:type", Date)
 ], Donation.prototype, "updatedAt", void 0);
 exports.Donation = Donation = __decorate([
     (0, sequelize_typescript_1.Table)({
