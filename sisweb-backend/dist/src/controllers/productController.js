@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getChartData = exports.deleteProduct = exports.modifyProduct = exports.getProductById = exports.getAllProducts = exports.createProduct = void 0;
+exports.getAreaChartData = exports.getChartData = exports.deleteProduct = exports.modifyProduct = exports.getProductById = exports.getAllProducts = exports.createProduct = void 0;
 const product_1 = require("../models/product");
 // Create and Save a new Product
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -150,3 +150,24 @@ const getChartData = (_req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.getChartData = getChartData;
+// GET /api/product/chart
+const getAreaChartData = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield product_1.Product.findAll({
+            attributes: ['nombre', 'createdAt']
+        });
+        res.status(200).json({
+            status: 'success',
+            message: 'Chart data retrieved',
+            payload: data
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            status: 'error',
+            message: 'Error retrieving chart data: ' + err.message,
+            payload: null
+        });
+    }
+});
+exports.getAreaChartData = getAreaChartData;

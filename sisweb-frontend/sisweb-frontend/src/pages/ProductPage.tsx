@@ -6,6 +6,9 @@ import { Product } from "my-types";
 import React, {useState, useEffect, PureComponent} from 'react';
 import { getAllProducts, deleteProduct } from "../api/ProductAPI";
 import Example from "../components/SimpleBarChart.tsx";
+import Example1 from "../components/SimpleAreaChart.tsx";
+import { Link } from "react-router-dom";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 interface Props{}
 
@@ -33,56 +36,45 @@ const ProductPage = (_props: Props) => {
       <nav className="panel">
         <p className="panel-heading">Productos</p>
 
-        <div className="panel-block">
-          <h2>Filtro</h2>
-        </div>
-
         <div className="panel-block ">
+
           <div className="field is-grouped">
             <div className="field">
               <label className="label">Nombre</label>
               <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Text input"
-                />
+                <input className="input" type="text" placeholder="Text input" />
               </div>
             </div>
 
-            {/* <div className="field">
-              <label className="label">Descripcion</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Text input"
-                />
-              </div>
-            </div> */}
-
             <div className="field">
               <label className="label">Tipo</label>
-              <p className="control">
+              <div className="control">
                 <div className="select">
                   <select>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
-                    <option>4</option>
                   </select>
                 </div>
-              </p>
+              </div>
             </div>
 
             <div className="field is-align-content-flex-end mb-3">
-              <p className="control">
-                <button className="button is-link is-outlined">
-                  Filtrar
-                </button>
-              </p>
+              <div className="control">
+                <button className="button is-link is-outlined">Filtrar</button>
+              </div>
             </div>
+
+            <div className="field is-align-content-flex-end mb-3">
+              <div className="control">
+                <Link to="/addProduct">
+                <button className="button is-link ">Añadir</button>
+                </Link>
+              </div>
+            </div>
+
           </div>
+            
         </div>
 
         <div className="panel-block">
@@ -126,7 +118,16 @@ const ProductPage = (_props: Props) => {
                 </td>
                 <td>{product.cantidad}</td>
                 <td>{product.productTypeId}</td>
-                <td>{product.updatedAt.toLocaleString()}</td>
+                <td>{new Date(product.updatedAt).toLocaleString("es-MX", { 
+                  weekday: "long", 
+                  year: "numeric", 
+                  month: "long", 
+                  day: "numeric", 
+                  hour: "2-digit", 
+                  minute: "2-digit"
+                })}
+              </td>
+
                 {/* <td>{product.discountPercentage}</td>
                 <td>{product.rating}</td>
                 <td>{product.stock}</td> */}
@@ -153,6 +154,9 @@ const ProductPage = (_props: Props) => {
       </nav>
       <div className="pt-6">
         <Example data={products} />
+      </div>
+      <div className="pt-6">
+        <Example1 data={products} />
       </div>
     </>
   );

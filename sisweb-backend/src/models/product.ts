@@ -37,10 +37,10 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
    productType!: ProductType;
 
    @CreatedAt
-   @Column({ type: DataType.DATEONLY })
-   createdAt!: string;
+   @Column
+   createdAt!: Date;
  
    @UpdatedAt
-   @Column({ type: DataType.DATEONLY })
-   updatedAt!: string;
+   @Column
+   updatedAt!: Date;
 }
