@@ -23,12 +23,12 @@ export class Person extends Model<PersonAttributes, PersonCreationAttributes>{
 
    @HasMany(() => Donation, { onDelete: 'CASCADE' })
    donaciones?: Donation[];
-
+   
    @CreatedAt
-   @Column({ type: DataType.DATEONLY })
-   createdAt!: string;
+   @Column
+   createdAt!: Date;
  
    @UpdatedAt
-   @Column({ type: DataType.DATEONLY })
-   updatedAt!: string;
-}
+   @Column
+   updatedAt!: Date;
+  } 

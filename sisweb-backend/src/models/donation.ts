@@ -40,10 +40,10 @@ export class Donation extends Model<DonationAttributes, DonationCreationAttribut
     producto?: Product;
 
     @CreatedAt
-    @Column({ type: DataType.DATEONLY })
-    createdAt!: string;
-
+    @Column
+    createdAt!: Date;
+  
     @UpdatedAt
-    @Column({ type: DataType.DATEONLY })
-    updatedAt!: string;
+    @Column
+    updatedAt!: Date;
 }
