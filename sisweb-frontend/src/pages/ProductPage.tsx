@@ -38,7 +38,7 @@ const ProductPage = (_props: Props) => {
       setFilteredProducts(products);
     } else {
       const filtrados = products.filter(
-        (p) => p.productTypeId.toString() === selectedType
+        (p) => p.productTypeId?.toString() === selectedType
       );
       setFilteredProducts(filtrados);
     }
@@ -67,7 +67,7 @@ const ProductPage = (_props: Props) => {
                     onChange={(e) => setSelectedType(e.target.value)}
                   >
                     <option value="">Todos</option>
-                    <option value="1">1</option>
+                    <option value="6">6</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                   </select>
