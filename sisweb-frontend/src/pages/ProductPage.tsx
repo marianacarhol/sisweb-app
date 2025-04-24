@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Product } from "my-types";
@@ -30,10 +31,51 @@ const ProductPage = (_props: Props) => {
     if (productos) {
       setProducts(productos);
       setFilteredProducts(productos);
+=======
+import { useEffect, useState } from "react";
+import { Product } from "my-types";
+import { getAllProducts, deleteProduct } from "../api/ProductAPI";
+import FilterBar from "../components/FilterBar";
+import ProductTable from "../components/ProductTable";
+import SimpleBarChart from "../components/SimpleBarChart";
+import SimpleAreaChart from "../components/SimpleAreaChart";
+
+const ProductPage = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [selectedType, setSelectedType] = useState<string>("");
+  const [searchName, setSearchName] = useState<string>("");
+
+  useEffect(() => {
+    getAllProducts().then((data) => {
+      if (data) {
+        setProducts(data);
+        setFilteredProducts(data);
+      } else {
+        setProducts([]);
+        setFilteredProducts([]);
+      }
+    });
+  }, []);
+  
+  const handleDelete = async (id: number) => {
+    if (!confirm("¿Estás segura de eliminar este producto?")) return;
+
+    await deleteProduct(id);
+    const data = await getAllProducts();
+  
+    if (data) {
+      setProducts(data);
+      setFilteredProducts(data);
+    } else {
+      setProducts([]);
+      setFilteredProducts([]);
+>>>>>>> ea0fe6cd87ad626b4455292a38a27dbd9e12534a
     }
   };
 
   const handleFilter = () => {
+<<<<<<< HEAD
     if (selectedType === "") {
       setFilteredProducts(products);
     } else {
@@ -43,12 +85,31 @@ const ProductPage = (_props: Props) => {
       setFilteredProducts(filtrados);
     }
   };
+=======
+    let filtrados = products;
+  
+    if (selectedType !== "") {
+      filtrados = filtrados.filter(
+        (p) => p.productTypeId?.toString() === selectedType
+      );
+    }
+  
+    if (searchName.trim() !== "") {
+      filtrados = filtrados.filter((p) =>
+        p.nombre.toLowerCase().includes(searchName.toLowerCase())
+      );
+    }
+  
+    setFilteredProducts(filtrados);
+  };  
+>>>>>>> ea0fe6cd87ad626b4455292a38a27dbd9e12534a
 
   return (
     <>
       <nav className="panel">
         <p className="panel-heading">Productos</p>
 
+<<<<<<< HEAD
         <div className="panel-block">
           <div className="field is-grouped">
             <div className="field">
@@ -92,11 +153,21 @@ const ProductPage = (_props: Props) => {
             </div>
           </div>
         </div>
+=======
+        <FilterBar
+          selectedType={selectedType}
+          setSelectedType={setSelectedType}
+          searchName={searchName}
+          setSearchName={setSearchName}
+          handleFilter={handleFilter}
+        />
+>>>>>>> ea0fe6cd87ad626b4455292a38a27dbd9e12534a
 
         <div className="panel-block">
           <h2>Resultados</h2>
         </div>
 
+<<<<<<< HEAD
         <div className="panel-block">
           <table className="table is-hoverable is-fullwidth">
             <thead>
@@ -145,6 +216,17 @@ const ProductPage = (_props: Props) => {
       </div>
       <div className="pt-6">
         <Example1 data={products} />
+=======
+        <ProductTable products={filteredProducts} onDelete={handleDelete} />
+      </nav>
+
+      <div className="pt-6">
+        <SimpleBarChart data={products} />
+      </div>
+
+      <div className="pt-6">
+        <SimpleAreaChart data={products} />
+>>>>>>> ea0fe6cd87ad626b4455292a38a27dbd9e12534a
       </div>
     </>
   );

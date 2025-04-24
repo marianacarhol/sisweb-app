@@ -3,24 +3,35 @@ import App from "../App";
 import ProductPage from "../pages/ProductPage";
 import ErrorPage from "../pages/ErrorPage";
 import AddPage from "../pages/AddPage";
+import ModifyPage from "../pages/ModifyPage";
 
 const router = createBrowserRouter([
     {
         path: "/", 
         element: <App />,
+        errorElement: <ErrorPage />,
         children: [
             {
-            path: "products",
-            element: <ProductPage />,
-            errorElement: <ErrorPage />,
+                path: "",
+                element: <ProductPage />,
+                errorElement: <ErrorPage />,
+              },
+            {
+                path: "products",
+                element: <ProductPage />,
+                errorElement: <ErrorPage />,
             },
             {
-                path: "addProduct",
+                path: "addproduct",
                 element: <AddPage />,
+                errorElement: <ErrorPage />
+            },
+            {
+                path: "modifyproduct/:id",
+                element: <ModifyPage />,
                 errorElement: <ErrorPage />
             }
         ],
-        errorElement: <ErrorPage />,
     },
 ]);
 
