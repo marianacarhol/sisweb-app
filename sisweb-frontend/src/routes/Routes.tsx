@@ -4,6 +4,7 @@ import ProductPage from "../pages/ProductPage";
 import ErrorPage from "../pages/ErrorPage";
 import AddPage from "../pages/AddPage";
 import ModifyPage from "../pages/ModifyPage";
+import Dashboard from "../pages/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "",
-                element: <ProductPage />,
+                element: <Dashboard />,
                 errorElement: <ErrorPage />,
               },
             {
@@ -30,7 +31,12 @@ const router = createBrowserRouter([
                 path: "modifyproduct/:id",
                 element: <ModifyPage />,
                 errorElement: <ErrorPage />
-            }
+            },
+            {
+                path: "dashboard",
+                element: <Dashboard />,
+                errorElement: <ErrorPage />
+              }
         ],
     },
 ]);
