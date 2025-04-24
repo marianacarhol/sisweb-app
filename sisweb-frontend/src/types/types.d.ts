@@ -25,5 +25,13 @@ declare module "my-types" {
       id: number;
       nombre: string;
     }
+
+    export interface Donation {
+      id: number;
+      personId: number;
+      productId: number;
+      cantidad: number;
+      updatedAt: Date;
+    }
   }
   

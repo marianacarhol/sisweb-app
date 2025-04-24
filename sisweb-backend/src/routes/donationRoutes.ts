@@ -4,12 +4,15 @@ import {
   deleteDonation,
   getAllDonations,
   getDonationById,
+  getAreaChartData,
   modifyDonation
 } from '../controllers/donationController';
 
 const donationRouter: Router = Router();
 
 donationRouter.get('/', getAllDonations);
+
+donationRouter.get('/areachart', getAreaChartData);
 
 donationRouter.get('/:id', getDonationById);
 

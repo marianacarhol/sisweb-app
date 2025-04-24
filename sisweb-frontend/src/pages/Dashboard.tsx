@@ -1,16 +1,32 @@
 import { useEffect, useState } from "react";
 import { Product } from "my-types";
-import { getAllProducts, deleteProduct } from "../api/ProductAPI";
+import { getAllProducts } from "../api/ProductAPI";
+import { getAllDonations } from "../api/DonationAPI"
 import SimpleBarChart from "../components/SimpleBarChart";
 import SimpleAreaChart from "../components/SimpleAreaChart";
 
 const Dashboard = () => {
     const [products, setProducts] = useState<Product[]>([]);
+    const [donations, setDonations] = useState<any[]>([]); // Add donations state
   
+
     useEffect(() => {
-      getAllProducts().then((data) => {
-        if (data) setProducts(data);
-        else setProducts([]);
+      Promise.all([
+        getAllProducts(),
+        getAllDonations(), // Assuming you have a function to fetch donations
+      ]).then(([productData, donationData]) => {
+        if (productData) {
+          setProducts(productData);}
+        
+        else {
+          setProducts([]);
+        }
+        
+        if (donationData) {
+          setDonations(donationData); // Set donations data
+        } else {
+          setDonations([]);
+        }
       });
     }, []);
   
@@ -23,7 +39,7 @@ const Dashboard = () => {
         </div>
   
         <div className="pt-6">
-          <SimpleAreaChart data={products} />
+          <SimpleAreaChart data={donations} />
         </div>
       </div>
     );

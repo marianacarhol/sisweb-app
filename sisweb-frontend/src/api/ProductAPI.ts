@@ -2,20 +2,19 @@ import api from ".";
 import { Product } from "my-types";
 
 //ADD A PRODUCT
-export const addProduct = async (nombre:string, cantidad:number, productTypeId: number) => {
-    try {
-        const res = await api.post(`/product/`, { nombre, cantidad, productTypeId }, {
-        
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        console.log("Product created successfully:", res.data)
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
+export const addProduct = async (nombre: string, cantidad: number, productTypeId: number): Promise<number | undefined> => {
+  try {
+      const res = await api.post(`/product/`, { nombre, cantidad, productTypeId });
+      return res.data.payload?.id; // Safely return the ID
+  } catch (err) {
+      console.error("Failed to create product:", err);
+      return undefined; // Return undefined on failure
+  }
+};
+
+  
+
+
 
 // UPDATE A PRODUCT (CON PATCH)
 export const updateProduct = async (
@@ -67,12 +66,11 @@ export const getProductById = async (id: number) => {
   
 
 //DELETE A PRODUCT
-export const deleteProduct = async (id: number) => {
-    try {
-    const res = await api.delete(`/product/${id}`);
-    console.log(res.data); //-> for connection testing purpose
-    return res.data;
-    } catch (err) {
-    console.log(err);
-    }
+export const deleteProduct = async (productId: number): Promise<void> => {
+  try {
+      await api.delete(`/product/${productId}`);
+  } catch (err) {
+      console.error("Failed to delete product:", err);
+      throw err; // Re-throw the error for further handling
+  }
 };

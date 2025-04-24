@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Product } from "my-types";
+import { Donation } from "my-types"
 import { getAllProducts, deleteProduct } from "../api/ProductAPI";
+import { getAllDonations } from "../api/DonationAPI"
 import FilterBar from "../components/FilterBar";
 import ProductTable from "../components/ProductTable";
 import SimpleBarChart from "../components/SimpleBarChart";
@@ -8,28 +10,39 @@ import SimpleAreaChart from "../components/SimpleAreaChart";
 
 const ProductPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [donations, setDonations] = useState<any[]>([]); // Add donations state
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [selectedType, setSelectedType] = useState<string>("");
   const [searchName, setSearchName] = useState<string>("");
 
   useEffect(() => {
-    getAllProducts().then((data) => {
-      if (data) {
-        setProducts(data);
-        setFilteredProducts(data);
+    // Fetch both products and donations
+    Promise.all([
+      getAllProducts(),
+      getAllDonations(), // Assuming you have a function to fetch donations
+    ]).then(([productData, donationData]) => {
+      if (productData) {
+        setProducts(productData);
+        setFilteredProducts(productData);
       } else {
         setProducts([]);
         setFilteredProducts([]);
       }
+
+      if (donationData) {
+        setDonations(donationData); // Set donations data
+      } else {
+        setDonations([]);
+      }
     });
   }, []);
-  
+
   const handleDelete = async (id: number) => {
     if (!confirm("¿Estás segura de eliminar este producto?")) return;
 
     await deleteProduct(id);
     const data = await getAllProducts();
-  
+
     if (data) {
       setProducts(data);
       setFilteredProducts(data);
@@ -41,19 +54,19 @@ const ProductPage = () => {
 
   const handleFilter = () => {
     let filtrados = products;
-  
+
     if (selectedType !== "") {
       filtrados = filtrados.filter(
         (p) => p.productTypeId?.toString() === selectedType
       );
     }
-  
+
     if (searchName.trim() !== "") {
       filtrados = filtrados.filter((p) =>
         p.nombre.toLowerCase().includes(searchName.toLowerCase())
       );
     }
-  
+
     setFilteredProducts(filtrados);
   };  
 
@@ -74,8 +87,13 @@ const ProductPage = () => {
           <h2>Resultados</h2>
         </div>
 
-        <ProductTable products={filteredProducts} onDelete={handleDelete} />
+        <ProductTable
+          products={filteredProducts}
+          donations={donations} // Pass donations prop
+          onDelete={handleDelete}
+        />
       </nav>
+
     </>
   );
 };

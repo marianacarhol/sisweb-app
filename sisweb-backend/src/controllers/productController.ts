@@ -137,24 +137,6 @@ export const getChartData: RequestHandler = async (_req, res) => {
   }
 };
 
-// GET /api/product/chart
-export const getAreaChartData: RequestHandler = async (_req, res) => {
-  try {
-    const data = await Product.findAll({
-      attributes: ['nombre', 'createdAt']
-    });
-    res.status(200).json({
-      status: 'success',
-      message: 'Chart data retrieved',
-      payload: data
-    });
-  } catch (err: any) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Error retrieving chart data: ' + err.message,
-      payload: null
-    });
-  }
-};
+
 
 
