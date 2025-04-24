@@ -76,14 +76,6 @@ const ProductPage = () => {
 
         <ProductTable products={filteredProducts} onDelete={handleDelete} />
       </nav>
-
-      <div className="pt-6">
-        <SimpleBarChart data={products} />
-      </div>
-
-      <div className="pt-6">
-        <SimpleAreaChart data={products} />
-      </div>
     </>
   );
 };

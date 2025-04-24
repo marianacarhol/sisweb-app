@@ -6,8 +6,6 @@ interface Props {
   data: Product[];
 }
 
-
-
 export default class Example1 extends PureComponent<Props> {
   static demoUrl = 'https://codesandbox.io/p/sandbox/simple-area-chart-4y9cnl';
 
