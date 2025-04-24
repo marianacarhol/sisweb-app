@@ -19,7 +19,7 @@ const ProductTable = ({ products, donations, onDelete }: ProductTableProps) => (
           <th>Nombre</th>
           <th>Cantidad</th>
           <th>Tipo de producto</th>
-          <th>Id de Donador</th>
+          <th>ID de Donador</th>
           <th>Fecha de actualización</th>
           <th>Eliminar</th>
           <th>Modificar</th>
