@@ -7,6 +7,7 @@ import FilterBar from "../components/FilterBar";
 import ProductTable from "../components/ProductTable";
 import SimpleBarChart from "../components/SimpleBarChart";
 import SimpleAreaChart from "../components/SimpleAreaChart";
+import './ProductPage.css'
 
 const ProductPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -72,9 +73,9 @@ const ProductPage = () => {
 
   return (
     <>
-      <nav className="panel">
-        <p className="panel-heading">Productos</p>
-
+      <nav className="container">
+        <p className="title">Productos</p>
+        <hr />
         <FilterBar
           selectedType={selectedType}
           setSelectedType={setSelectedType}
@@ -82,10 +83,6 @@ const ProductPage = () => {
           setSearchName={setSearchName}
           handleFilter={handleFilter}
         />
-
-        <div className="panel-block">
-          <h2>Resultados</h2>
-        </div>
 
         <ProductTable
           products={filteredProducts}

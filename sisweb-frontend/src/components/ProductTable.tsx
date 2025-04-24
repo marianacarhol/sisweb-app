@@ -38,7 +38,7 @@ const ProductTable = ({ products, donations, onDelete }: ProductTableProps) => (
               </td>
               <td>{product.cantidad}</td>
               <td>{product.productTypeId}</td>
-              <td>{relatedDonation ? relatedDonation.personId : "No donation"}</td>
+              <td>{relatedDonation ? relatedDonation.personId : "-"}</td>
               <td>
                 {new Date(product.updatedAt).toLocaleString("es-MX", {
                   weekday: "long",

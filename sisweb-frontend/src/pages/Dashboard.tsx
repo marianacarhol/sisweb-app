@@ -4,6 +4,7 @@ import { getAllProducts } from "../api/ProductAPI";
 import { getAllDonations } from "../api/DonationAPI"
 import SimpleBarChart from "../components/SimpleBarChart";
 import SimpleAreaChart from "../components/SimpleAreaChart";
+import './Dashboard.css'
 
 const Dashboard = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -32,8 +33,8 @@ const Dashboard = () => {
   
     return (
       <div className="container mt-5">
-        <h1 className="title">Dashboard</h1>
-  
+        <h1 className="title">DASHBOARD</h1>
+        <hr />
         <div className="pt-6">
           <SimpleBarChart data={products} />
         </div>
