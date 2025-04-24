@@ -10,6 +10,7 @@ const ProductPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [selectedType, setSelectedType] = useState<string>("");
+  const [searchName, setSearchName] = useState<string>("");
 
   useEffect(() => {
     getAllProducts().then((data) => {
@@ -23,7 +24,6 @@ const ProductPage = () => {
     });
   }, []);
   
-
   const handleDelete = async (id: number) => {
     if (!confirm("¿Estás segura de eliminar este producto?")) return;
 
@@ -40,15 +40,22 @@ const ProductPage = () => {
   };
 
   const handleFilter = () => {
-    if (selectedType === "") {
-      setFilteredProducts(products);
-    } else {
-      const filtrados = products.filter(
+    let filtrados = products;
+  
+    if (selectedType !== "") {
+      filtrados = filtrados.filter(
         (p) => p.productTypeId?.toString() === selectedType
       );
-      setFilteredProducts(filtrados);
     }
-  };
+  
+    if (searchName.trim() !== "") {
+      filtrados = filtrados.filter((p) =>
+        p.nombre.toLowerCase().includes(searchName.toLowerCase())
+      );
+    }
+  
+    setFilteredProducts(filtrados);
+  };  
 
   return (
     <>
@@ -58,6 +65,8 @@ const ProductPage = () => {
         <FilterBar
           selectedType={selectedType}
           setSelectedType={setSelectedType}
+          searchName={searchName}
+          setSearchName={setSearchName}
           handleFilter={handleFilter}
         />
 

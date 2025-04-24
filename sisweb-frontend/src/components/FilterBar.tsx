@@ -3,21 +3,24 @@ import { Link } from "react-router-dom";
 interface FilterBarProps {
   selectedType: string;
   setSelectedType: (value: string) => void;
+  searchName: string;
+  setSearchName: (value: string) => void;
   handleFilter: () => void;
 }
 
-const FilterBar = ({ selectedType, setSelectedType, handleFilter }: FilterBarProps) => (
+
+const FilterBar = ({ selectedType, setSelectedType, handleFilter, searchName, setSearchName}: FilterBarProps) => (
   <div className="panel-block">
     <div className="field is-grouped">
       <div className="field">
         <label className="label">Nombre</label>
         <div className="control">
-          <input className="input" type="text" placeholder="Text input" />
+          <input className="input" type="text" placeholder="Buscar por nombre" value={searchName} onChange={(e) => setSearchName(e.target.value)} />
         </div>
       </div>
 
       <div className="field">
-        <label className="label">Tipo</label>
+        <label className="label">Tipo de producto</label>
         <div className="control">
           <div className="select">
             <select
@@ -28,6 +31,13 @@ const FilterBar = ({ selectedType, setSelectedType, handleFilter }: FilterBarPro
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
+              <option value="3">4</option>
+              <option value="3">5</option>
+              <option value="3">6</option>
+              <option value="3">7</option>
+              <option value="3">8</option>
+              <option value="3">9</option>
+              <option value="3">10</option>
             </select>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { addProduct } from "../api/ProductAPI";
 
-
 interface Props {}
 
 const AddPage = (_props: Props) => {

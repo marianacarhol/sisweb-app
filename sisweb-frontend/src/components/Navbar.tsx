@@ -15,10 +15,10 @@ const Navbar = () => {
       </div>
       <div className="level-right">
         <div className="level-item">
-          <Link to="/">Home</Link>
+          <Link to="/">Dashboard</Link>
         </div>
         <div className="level-item">
-          <Link to="/products">Products</Link>
+          <Link to="/products">Productos</Link>
         </div>
       </div>
     </nav>
