@@ -29,14 +29,24 @@ export default class Example1 extends PureComponent<Props> {
   static demoUrl = 'https://codesandbox.io/p/sandbox/simple-area-chart-4y9cnl';
 
   render() {
-    const processedData = groupDonationsByDay(this.props.data);
+    const testData = [...this.props.data];
+
+    // Donación de prueba con fecha diferente
+    testData.push({
+      id: 999,
+      cantidad: 100,
+      updatedAt: new Date('2025-06-18T12:00:00Z'),
+      personId: 1,
+      productId: 1,
+    });
+    const processedData = groupDonationsByDay(testData);
 
     return (
       <ResponsiveContainer width="100%" height={400}>
         <AreaChart
           width={500}
           height={400}
-          data={processedData} // Usamos los datos agrupados por año, mes y día
+          data={processedData}
           margin={{
             top: 10,
             right: 30,
@@ -45,7 +55,7 @@ export default class Example1 extends PureComponent<Props> {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="yearMonthDay" /> {/* Mostramos el eje X como Año-Mes-Día */}
+          <XAxis dataKey="yearMonthDay" /> 
           <YAxis />
           <Tooltip />
           <Area type="monotone" dataKey="cantidad" stroke="#8884d8" fill="#8884d8" />

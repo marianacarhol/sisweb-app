@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { updateProduct, getProductById } from "../api/ProductAPI";
+import "./ModifyPage.css"; // <-- Asegúrate de importar el CSS
 
 const ModifyPage = () => {
   const { id } = useParams();
@@ -12,7 +13,6 @@ const ModifyPage = () => {
 
   useEffect(() => {
     if (!numericId) return;
-
     getProductById(numericId).then((product) => {
       if (product) {
         setNombre(product.nombre);
@@ -26,7 +26,6 @@ const ModifyPage = () => {
 
   const handleModify = () => {
     if (!numericId) return alert("ID inválido");
-
     if (confirm("¿Modificar producto?")) {
       updateProduct(
         numericId,
@@ -38,55 +37,68 @@ const ModifyPage = () => {
   };
 
   return (
-    <nav className="panel">
-      <div className="panel-heading">Modificar Producto</div>
-      <div className="panel-block">
-        <div className="field is-group">
+    <div className="container mt-5" style={{ fontFamily: "'Lusitana', serif" }}>
+      <div className="row">
+        <main className="col-10 offset-1">
+          <h1 className="modify-title">EDITAR PRODUCTO</h1>
+          <hr />
 
-          <div className="field">
-            <div>ID del producto:</div>
-            <input className="input" type="number" value={numericId} readOnly />
-          </div>
+          <form className="mb-5">
+            <div className="mb-4">
+              <label className="modify-label">ID</label>
+              <input
+                type="text"
+                className="form-control modify-input"
+                value={numericId}
+                readOnly
+              />
+            </div>
 
-          <div className="field">
-            <div>Nombre:</div>
-            <input
-              className="input"
-              type="text"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-            />
-          </div>
+            <div className="mb-4">
+              <label className="modify-label">Nombre</label>
+              <input
+                type="text"
+                className="form-control modify-input"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+              />
+            </div>
 
-          <div className="field">
-            <div>Cantidad:</div>
-            <input
-              className="input"
-              type="number"
-              value={cantidad}
-              onChange={(e) => setCantidad(e.target.value)}
-            />
-          </div>
+            <div className="mb-4">
+              <label className="modify-label">Cantidad</label>
+              <input
+                type="number"
+                className="form-control modify-input"
+                value={cantidad}
+                onChange={(e) => setCantidad(e.target.value)}
+              />
+            </div>
 
-          <div className="field">
-            <div>Tipo de Producto:</div>
-            <input
-              className="input"
-              type="number"
-              value={productTypeId}
-              onChange={(e) => setTipoProducto(e.target.value)}
-            />
-          </div>
+            <div className="mb-4">
+              <label className="modify-label">Tipo de producto</label>
+              <input
+                type="number"
+                className="form-control modify-input"
+                value={productTypeId}
+                onChange={(e) => setTipoProducto(e.target.value)}
+              />
+            </div>
 
-          <div>
-            <button className="button mt-5" onClick={handleModify}>
-              Modify
-            </button>
-          </div>
+            <hr />
 
-        </div>
+            <div className="d-flex justify-content-end">
+              <button
+                type="button"
+                onClick={handleModify}
+                className="modify-button"
+              >
+                Confirmar
+              </button>
+            </div>
+          </form>
+        </main>
       </div>
-    </nav>
+    </div>
   );
 };
 
