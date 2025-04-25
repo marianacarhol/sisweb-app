@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Product } from "my-types";
 import { getAllProducts, deleteProduct } from "../api/ProductAPI";
-import { getAllDonations } from "../api/DonationAPI"
+import { getAllDonations, deleteDonation } from "../api/DonationAPI"
 import FilterBar from "../components/FilterBar";
 import ProductTable from "../components/ProductTable";
 import './ProductPage.css'
@@ -34,20 +34,35 @@ const ProductPage = () => {
     });
   }, []);
 
-  const handleDelete = async (id: number) => {
-    if (!confirm("¿Estás segura de eliminar este producto?")) return;
-
-    await deleteProduct(id);
-    const data = await getAllProducts();
-
-    if (data) {
-      setProducts(data);
-      setFilteredProducts(data);
-    } else {
-      setProducts([]);
-      setFilteredProducts([]);
+  const handleDelete = async (productId: number) => {
+    if (!confirm("¿Estás seguro que quieres eliminar este producto?")) return;
+  
+    const relatedDonation = donations.find(
+      (donation) => donation.productId === productId
+    );
+  
+    if (relatedDonation) {
+      try {
+        await deleteDonation(relatedDonation.id);
+      } catch (err) {
+        console.error("Error eliminando donación:", err);
+        alert("Hubo un error al eliminar la donación.");
+        return;
+      }
     }
+
+    await deleteProduct(productId);
+
+    const [productData, donationData] = await Promise.all([
+      getAllProducts(),
+      getAllDonations(),
+    ]);
+  
+    setProducts(productData || []);
+    setFilteredProducts(productData || []);
+    setDonations(donationData || []);
   };
+  
 
   const handleFilter = () => {
     let filtrados = products;
