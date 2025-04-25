@@ -30,6 +30,8 @@ export default class Example1 extends PureComponent<Props> {
   static demoUrl = 'https://codesandbox.io/p/sandbox/simple-area-chart-4y9cnl';
 
   render() {
+    //Se agregan datos falsos con el proposito de ejemplicar la visualización del funcionamiento de chart
+
     const testData = [...this.props.data];
 
     // Donación de prueba con fecha diferente
