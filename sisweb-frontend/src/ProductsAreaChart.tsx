@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import AreaChartComponent from './components/SimpleAreaChart';
-import { Product } from 'my-types';
+import { Donation } from 'my-types';
 
-const ProductsAreaChart: React.FC = () => {
-  const [data, setData] = useState<Product[]>([]);
+const DonationsAreaChart: React.FC = () => {
+  const [data, setData] = useState<Donation[]>([]);
 
   useEffect(() => {
-    fetch('product/areachart')
+    fetch('donation/areachart')
       .then(res => res.json())
-      .then((d: Product[]) => setData(d))
+      .then((d: Donation[]) => setData(d))
       .catch(err => console.error(err));
   }, []);
 
   return <AreaChartComponent data={data} />;
 };
 
-export default ProductsAreaChart;
+export default DonationsAreaChart;

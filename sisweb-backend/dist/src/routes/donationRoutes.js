@@ -4,6 +4,7 @@ const express_1 = require("express");
 const donationController_1 = require("../controllers/donationController");
 const donationRouter = (0, express_1.Router)();
 donationRouter.get('/', donationController_1.getAllDonations);
+donationRouter.get('/areachart', donationController_1.getAreaChartData);
 donationRouter.get('/:id', donationController_1.getDonationById);
 donationRouter.post('/', donationController_1.createDonation);
 donationRouter.patch('/:id', donationController_1.modifyDonation);

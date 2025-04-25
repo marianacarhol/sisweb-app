@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteDonation = exports.modifyDonation = exports.getDonationById = exports.getAllDonations = exports.createDonation = void 0;
+exports.getAreaChartData = exports.deleteDonation = exports.modifyDonation = exports.getDonationById = exports.getAllDonations = exports.createDonation = void 0;
 const donation_1 = require("../models/donation");
 const person_1 = require("../models/person");
 const product_1 = require("../models/product");
@@ -130,3 +130,24 @@ const deleteDonation = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.deleteDonation = deleteDonation;
+// GET /api/product/chart
+const getAreaChartData = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield donation_1.Donation.findAll({
+            attributes: ['cantidad', 'updatedAt']
+        });
+        res.status(200).json({
+            status: 'success',
+            message: 'Chart data retrieved',
+            payload: data
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            status: 'error',
+            message: 'Error retrieving chart data: ' + err.message,
+            payload: null
+        });
+    }
+});
+exports.getAreaChartData = getAreaChartData;

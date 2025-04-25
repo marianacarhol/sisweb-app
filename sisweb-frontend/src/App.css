@@ -1,0 +1,17 @@
+#root {
+  margin: 0;
+  background-color: #FFFFFF;
+  font-family: 'luisitana';
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light;
+  }
+}
+
+html,
+body {
+  background-color: #ffffff !important;
+  color: #363636 !important;
+}

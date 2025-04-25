@@ -1,0 +1,21 @@
+.navbar-container{
+    background-color: #FA8D2E;
+    padding: 2rem;
+    font-family: 'luisitana';
+}
+
+.link{
+    color: white;
+    font-size: 2rem;
+    margin-right: 1.5rem;
+}
+
+.dashboard{
+    margin-right: 2.5rem;
+}
+
+.logo{
+    margin-left: 1rem;
+    font-size: 2.2rem;
+    color: white !important;
+}

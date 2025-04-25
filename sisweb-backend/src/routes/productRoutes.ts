@@ -6,14 +6,11 @@ import {
   getProductById,
   modifyProduct,
   getChartData,
-  getAreaChartData
 } from '../controllers/productController';
 
 const productRouter:Router = Router(); 
 
 productRouter.get('/chart', getChartData);
-
-productRouter.get('/areachart', getAreaChartData);
 
 productRouter.get('/', getAllProducts);
 

@@ -150,3 +150,4 @@ export const deleteProductType: RequestHandler = async (req: Request, res: Respo
     });
   }
 };
+
