@@ -5,16 +5,12 @@ import { Product } from "my-types";
 export const addProduct = async (nombre: string, cantidad: number, productTypeId: number): Promise<number | undefined> => {
   try {
       const res = await api.post(`/product/`, { nombre, cantidad, productTypeId });
-      return res.data.payload?.id; // Safely return the ID
+      return res.data.payload?.id;
   } catch (err) {
       console.error("Failed to create product:", err);
-      return undefined; // Return undefined on failure
+      return undefined;
   }
 };
-
-  
-
-
 
 // UPDATE A PRODUCT (CON PATCH)
 export const updateProduct = async (
@@ -45,7 +41,7 @@ export const updateProduct = async (
 export const getAllProducts = async () => {
 try {
 const res = await api.get('/product');
-console.log(res.data); //-> for connection testing purpose
+console.log(res.data); 
 const products: Product[] = await res.data.payload;
 return products;
 } catch (err) {
@@ -71,6 +67,6 @@ export const deleteProduct = async (productId: number): Promise<void> => {
       await api.delete(`/product/${productId}`);
   } catch (err) {
       console.error("Failed to delete product:", err);
-      throw err; // Re-throw the error for further handling
+      throw err;
   }
 };
