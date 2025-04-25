@@ -7,31 +7,28 @@ export const addDonation = async (personId: number, productId: number, cantidad:
         await api.post(`/donation/`, { personId, productId, cantidad });
     } catch (err) {
         console.error("Failed to create donation:", err);
-        throw err; // Re-throw the error to allow handling in the caller
+        throw err;
     }
 };
 
-// GET ALL DONATIONS
-export const getAllDonations = async (): Promise<Donation[] | undefined> => {
-    try {
-        const res = await api.get('/donation');
-        console.log(res.data); // For connection testing purpose
-        const donations: Donation[] = res.data.payload;
-        return donations;
+
+export const getAllDonations = async () => {
+try {
+    const res = await api.get('/donation');
+    console.log(res.data); 
+    const donations: Donation[] = await res.data.payload;
+    return donations;
     } catch (err) {
-        console.error("Failed to fetch donations:", err);
-    }
+    console.log(err);
+}
 };
 
-// UPDATE A DONATION
-export const updateDonation = async (id: number, cantidad: number): Promise<void> => {
+export const deleteDonation = async (id: number) => {
     try {
-        const response = await api.patch(`/donation/${id}`, { cantidad: cantidad.toString() }); // Send updated amount
-        console.log("Donation updated successfully:", response.data);
+      const res = await api.delete(`/donation/${id}`);
+      console.log("Donation deleted:", res.data);
     } catch (err) {
-        console.error("Failed to update donation:", err);
-        throw err; // Re-throw the error for handling in the caller
+      console.error("Error deleting donation:", err);
+      throw err;
     }
-};
-
-
+  };
