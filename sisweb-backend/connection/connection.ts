@@ -8,7 +8,7 @@ const connection = new Sequelize({
     database: 'sisweb_db',
     dialect: 'mysql',
     username: 'sisweb_user',
-    password: '123456',
+    password: '12345',
     host: 'localhost',
     port: 3306,
     //storage: ':memory:',

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { updateProduct, getProductById } from "../api/ProductAPI";
-import "./ModifyPage.css"; // <-- Asegúrate de importar el CSS
+import "./ModifyPage.css";
 
 const ModifyPage = () => {
   const { id } = useParams();

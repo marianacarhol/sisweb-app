@@ -1,26 +1,22 @@
 import { useEffect, useState } from "react";
 import { Product } from "my-types";
-import { Donation } from "my-types"
 import { getAllProducts, deleteProduct } from "../api/ProductAPI";
 import { getAllDonations } from "../api/DonationAPI"
 import FilterBar from "../components/FilterBar";
 import ProductTable from "../components/ProductTable";
-import SimpleBarChart from "../components/SimpleBarChart";
-import SimpleAreaChart from "../components/SimpleAreaChart";
 import './ProductPage.css'
 
 const ProductPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [donations, setDonations] = useState<any[]>([]); // Add donations state
+  const [donations, setDonations] = useState<any[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [selectedType, setSelectedType] = useState<string>("");
   const [searchName, setSearchName] = useState<string>("");
 
   useEffect(() => {
-    // Fetch both products and donations
     Promise.all([
       getAllProducts(),
-      getAllDonations(), // Assuming you have a function to fetch donations
+      getAllDonations(),
     ]).then(([productData, donationData]) => {
       if (productData) {
         setProducts(productData);
@@ -31,7 +27,7 @@ const ProductPage = () => {
       }
 
       if (donationData) {
-        setDonations(donationData); // Set donations data
+        setDonations(donationData);
       } else {
         setDonations([]);
       }
@@ -74,7 +70,7 @@ const ProductPage = () => {
   return (
     <>
       <nav className="container">
-        <p className="title">Productos</p>
+        <p className="title">PRODUCTOS</p>
         <hr />
         <FilterBar
           selectedType={selectedType}
@@ -86,7 +82,7 @@ const ProductPage = () => {
 
         <ProductTable
           products={filteredProducts}
-          donations={donations} // Pass donations prop
+          donations={donations}
           onDelete={handleDelete}
         />
       </nav>

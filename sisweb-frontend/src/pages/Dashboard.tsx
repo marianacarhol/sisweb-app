@@ -5,6 +5,7 @@ import { getAllDonations } from "../api/DonationAPI"
 import SimpleBarChart from "../components/SimpleBarChart";
 import SimpleAreaChart from "../components/SimpleAreaChart";
 import './Dashboard.css'
+import DonationsAreaChart from "../ProductsAreaChart";
 
 const Dashboard = () => {
     const [products, setProducts] = useState<Product[]>([]);

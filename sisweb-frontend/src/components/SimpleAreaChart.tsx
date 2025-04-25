@@ -8,7 +8,7 @@ interface Props {
 
 function groupDonationsByDay(data: Donation[]) { //Función recibe data, arreglo de donaciones
   const groupedData = data.reduce((acc, donation) => { //data.reduce procesa cada donación una por una , acc contenedor donde se guardan suma de donaciones
-                                                      //donation cada donacion de la lista mientras se procesan
+    //donation cada donacion de la lista mientras se procesan
     const date = new Date(donation.updatedAt);
     const yearMonthDay = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`; //le da formato
 
